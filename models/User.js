@@ -11,7 +11,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/.+@.\..+/, 'Must match and email'],
+        match: [/.+@.+\..+/, 'Must match an email'],
   
     },
     thoughts: [
@@ -35,11 +35,12 @@ const userSchema = new Schema({
     }
 );
 
-const User = model('User', userSchema);
 
 // get total count of friends on query 
 userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
+
+const User = model('User', userSchema);
 
 module.exports = User;
